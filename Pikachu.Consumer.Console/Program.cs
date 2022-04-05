@@ -4,8 +4,14 @@ using Pikachu.Consumer.Console;
 
 var services = new ServiceCollection();
 
-services.AddSingleton<IConsoleWriter, ConsoleWriter>();
+// services.AddTransient<IIdGenrator, IdGenerator>();
+// services.AddTransient<ConsoleWriter>();
+services.AddSingleton(new IdGenerator());
 
 var serviceProvider = services.BuildServiceProvider();
 
-var service = serviceProvider.GetService<IConsoleWriter>();
+var service = serviceProvider.GetService<IdGenerator>();
+var service2 = serviceProvider.GetService<IdGenerator>();
+
+Console.WriteLine(service.Id);
+Console.WriteLine(service2.Id);
