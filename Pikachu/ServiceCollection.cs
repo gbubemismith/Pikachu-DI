@@ -10,7 +10,28 @@ public class ServiceCollection : List<ServiceDescriptor>
 
     public ServiceCollection AddSingleton<TService>(Func<ServiceProvider, TService> factory) where TService : class
     {
-        
+        var serviceDescriptor = new ServiceDescriptor
+        {
+            ServiceType = typeof(TService),
+            ImplementaionType = typeof(TService),
+            ImplementationFactory = factory,
+            LifeTime = ServiceLifetime.Singleton
+        };
+        Add(serviceDescriptor);
+        return this;
+    }
+    
+    public ServiceCollection AddTransient<TService>(Func<ServiceProvider, TService> factory) where TService : class
+    {
+        var serviceDescriptor = new ServiceDescriptor
+        {
+            ServiceType = typeof(TService),
+            ImplementaionType = typeof(TService),
+            ImplementationFactory = factory,
+            LifeTime = ServiceLifetime.Transient
+        };
+        Add(serviceDescriptor);
+        return this;
     }
 
     public ServiceCollection AddSingleton(object implementation)

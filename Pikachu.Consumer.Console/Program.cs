@@ -6,7 +6,7 @@ var services = new ServiceCollection();
 
 // services.AddTransient<IIdGenrator, IdGenerator>();
 // services.AddTransient<ConsoleWriter>();
-services.AddSingleton(new IdGenerator());
+services.AddSingleton(provider => new IdGenerator());
 
 var serviceProvider = services.BuildServiceProvider();
 
